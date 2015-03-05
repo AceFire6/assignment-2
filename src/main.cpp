@@ -1,20 +1,34 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
 
 
 int main(int argc, char *argv[]) {
-	std::string imageBase = "mri_raws/%s.%s";
-	if (argc >= 2) {
-		imageBase = std::sprintf(imageBase.c_str(), argv[1]);
-	} else {
-		std::cout << "Need an image base name as an argument!" << std::endl;
-		return 1;
-	}
+    if (argc < 2) {
+        std::cout << "Image base name required as first argument!" << std::endl;
+        return 0;
+    }
 
+    std::string imageFile = "mri_raw/" + std::string(argv[1]);
+    std::string imageDat = imageFile + ".data";
 
-	for (int i = 0; i < argc; i++) {
-		std::cout << argv[i] << std::endl;
-	}
+    std::ifstream inFile(imageDat);
+    std::string line;
 
-	return 0;
+    int width = 0, height = 0, numImages = 0;
+    if (inFile.is_open()) {
+        while (std::getline(inFile, line)) {
+            std::istringstream ss(line);
+            ss >> width >> std::ws >> height >> std::ws >> numImages;
+        }
+    }
+    std::cout << width << " " << height << numImages << std::endl;
+    std::cout << imageDat << "\t" << imageFile << std::endl;
+
+    for (int i = 0; i < argc; i++) {
+        std::cout << argv[i] << std::endl;
+    }
+
+    return 0;
 }
