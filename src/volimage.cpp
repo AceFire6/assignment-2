@@ -18,7 +18,7 @@ VolImage::~VolImage() {
 
 bool VolImage::readImages(std::string baseName) {
     std::string imageFile = "/home/acefire6/ClionProjects/assignment-2/build/mri_raws/" + baseName;
-    std::string imageDat = imageFile + ".data";
+    std::string imageDat = imageFile + ".dat";
 
     std::ifstream inFile(imageDat);
     std::string line;
@@ -40,8 +40,8 @@ bool VolImage::readImages(std::string baseName) {
 
     slices.resize(numImages);
     std::string fileName;
-    for (int i = 0; i < numImages; ++i) {
-        fileName = imageFile + std::to_string(i) + ".raw";
+    for (int imageNum = 0; imageNum < numImages; ++imageNum) {
+        fileName = imageFile + std::to_string(imageNum) + ".raw";
         std::ifstream rawFile(fileName, std::ios::binary);
 
         if (rawFile.is_open()) {
@@ -57,7 +57,7 @@ bool VolImage::readImages(std::string baseName) {
             }
 
             rawFile.close();
-            slices.push_back(imageBytes);
+            slices[imageNum] = imageBytes;
             delete [] imageBytes;
         } else {
             std::cout << "Couldn't open file " << fileName << std::endl;
