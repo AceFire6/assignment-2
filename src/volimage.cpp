@@ -8,33 +8,64 @@
 
 
 VolImage::VolImage() {
-    VolImage::width = 0;
-    VolImage::height = 0;
-
-    std::vector<unsigned char **> *VolImage::slices = new std::vector<unsigned char **>[0];
+    width = 0;
+    height = 0;
 }
 
 VolImage::~VolImage() {
-    delete [] VolImage::slices;
+
 }
 
 bool VolImage::readImages(std::string baseName) {
-    std::string imageFile = "/home/mlljet001/ClionProjects/assignment-2/build/mri_raws/" + baseName;
+    std::string imageFile = "/home/acefire6/ClionProjects/assignment-2/build/mri_raws/" + baseName;
     std::string imageDat = imageFile + ".data";
 
     std::ifstream inFile(imageDat);
     std::string line;
 
-    int numImages = 0;
+    unsigned int numImages = 0;
     if (inFile.is_open()) {
         while (std::getline(inFile, line)) {
             std::istringstream ss(line);
-            ss >> VolImage::width >> std::ws >> VolImage::height >> std::ws >> numImages;
+            ss >> width >> std::ws >> height >> std::ws >> numImages;
         }
+        inFile.close();
     } else {
+        inFile.close();
         std::cout << "File not found!" << std::endl;
+        return false;
     }
     std::cout << "Width: " << width << " Height: " << height << " Num Images: " << numImages << std::endl;
+
+
+    slices.resize(numImages);
+    std::string fileName;
+    for (int i = 0; i < numImages; ++i) {
+        fileName = imageFile + std::to_string(i) + ".raw";
+        std::ifstream rawFile(fileName, std::ios::binary);
+
+        if (rawFile.is_open()) {
+            unsigned char ** imageBytes = new unsigned char * [height];
+
+            for (int row = 0; row < height; ++row) {
+                unsigned char * rowBytes = new unsigned char [width];
+
+                rawFile.seekg (row * width);
+                rawFile.read (reinterpret_cast<char *>(rowBytes), width);
+                imageBytes[row] = rowBytes;
+                delete [] rowBytes;
+            }
+
+            rawFile.close();
+            slices.push_back(imageBytes);
+            delete [] imageBytes;
+        } else {
+            std::cout << "Couldn't open file " << fileName << std::endl;
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
