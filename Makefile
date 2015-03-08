@@ -3,7 +3,7 @@
 
 CC=g++
 FLAGS=-std=c++11
-SOURCES=src/driver.cpp
+SOURCES=src/main.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXE_NAME=volimage
 
