@@ -23,6 +23,9 @@ int main(int argc, char *argv[]) {
     int sliceIndex = 0;
     std::string outputFilenameX;
 
+    std::cout << "Number of images: " << volImage.getImageCount() << std::endl;
+    std::cout << "Number of bytes required: " << volImage.volImageSize() << std::endl;
+
     if (argc > 2) {
         for (int i = 2; i < argc; i++) {
             if (std::string(argv[i]) == "-d") {
