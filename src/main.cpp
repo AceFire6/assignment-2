@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     if (argc > 2) {
         for (int i = 2; i < argc; i++) {
             if (std::string(argv[i]) == "-d") {
-                if (argc < 6 || argv[i + 1][0] != '-' || argv[i + 2][0] != '-') {
+                if (argc < 6 || argv[i + 1][0] == '-' || argv[i + 2][0] == '-') {
                     std::cout << "Too few arguments after -d!" << std::endl;
                     return 0;
                 }
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
             }
 
             if (std::string(argv[i]) == "-x") {
-                if (argc < 5 || argv[i + 1][0] != '-') {
+                if (argc < 5 || argv[i + 1][0] == '-') {
                     std::cout << "Too few arguments after -x!" << std::endl;
                     return 0;
                 }
@@ -50,6 +50,9 @@ int main(int argc, char *argv[]) {
         }
         std::cout << dFlag << " " << imageI << " " << imageJ << " " << outputFilenameD << std::endl;
         std::cout << xFlag << " " << sliceIndex << " " << outputFilenameX << std::endl;
+        if (xFlag) {
+            volImage.extract(sliceIndex, outputFilenameX);
+        }
     }
 
     return 0;
