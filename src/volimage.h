@@ -7,7 +7,7 @@
 namespace MLLJET001 {
     class VolImage {
     private: // private members
-        int width, height; // width and height of image stack
+        int width, height, numImages; // width and height of image stack
         std::vector<unsigned char **> slices; // data for each slice, in order
 
     public: // public members
@@ -27,6 +27,8 @@ namespace MLLJET001 {
         // number of bytes uses to store image data bytes
         //and pointers (ignore vector<> container, dims etc)
         int volImageSize(); // define in .cpp
+
+        int getImageCount();
     };
 }
 

@@ -10,11 +10,16 @@ namespace MLLJET001 {
     VolImage::VolImage() {
         width = 0;
         height = 0;
+        numImages = 0;
     }
 
 
     VolImage::~VolImage() {
 
+    }
+
+    int VolImage::getImageCount() {
+        return numImages;
     }
 
 
@@ -25,7 +30,7 @@ namespace MLLJET001 {
         std::ifstream inFile(imageDat);
         std::string line;
 
-        unsigned int numImages = 0;
+
         if (inFile.is_open()) {
             while (std::getline(inFile, line)) {
                 std::istringstream ss(line);
@@ -40,7 +45,7 @@ namespace MLLJET001 {
         std::cout << "Width: " << width << " Height: " << height << " Num Images: " << numImages << std::endl;
 
 
-        slices.resize(numImages);
+        slices.resize((unsigned int)numImages);
         std::string fileName;
         for (int imageNum = 0; imageNum < numImages; ++imageNum) {
             fileName = imageFile + std::to_string(imageNum) + ".raw";
@@ -51,16 +56,12 @@ namespace MLLJET001 {
 
                 for (int row = 0; row < height; ++row) {
                     unsigned char *rowBytes = new unsigned char[width];
-
-                    rawFile.seekg(row * width);
                     rawFile.read(reinterpret_cast<char *>(rowBytes), width);
                     imageBytes[row] = rowBytes;
-                    delete[] rowBytes;
                 }
 
                 rawFile.close();
                 slices[imageNum] = imageBytes;
-                delete[] imageBytes;
             } else {
                 std::cout << "Couldn't open file " << fileName << std::endl;
                 return false;
@@ -87,15 +88,29 @@ namespace MLLJET001 {
 
         outFile.open(rawFilename, std::ios::out | std::ios::binary);
         for (int row = 0; row < height; ++row) {
-            outFile.write((char *)slice[row], width);
+            outFile.write((char *)slice[row], width * sizeof(unsigned char));
         }
         outFile.close();
 
-        delete [] slice;
+//        for (int row = 0; row < height; ++row) {
+//            for (int col = 0; col < width; ++col) {
+//                std::cout << std::to_string(slices[sliceId][row][col]) << " ";
+//            }
+//            std::cout << std::endl;
+//        }
     }
 
 
     int VolImage::volImageSize() {
-        return 0;
+        int size = 0;
+
+        for (unsigned char ** slice: slices)  {
+            for (int row = 0; row < height; ++row) {
+                size += sizeof(slice[row]);
+                size += sizeof(&slice[row]);
+            }
+        }
+
+        return size;
     }
 }
