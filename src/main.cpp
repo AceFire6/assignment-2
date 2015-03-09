@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
         std::cout << "Image base name required as first argument!" << std::endl;
         return 0;
     }
-    VolImage volImage;
+    MLLJET001::VolImage volImage;
     volImage.readImages(std::string(argv[1]));
 
     bool dFlag = false;

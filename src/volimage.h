@@ -4,7 +4,8 @@
 #ifndef _VOLIMAGE_H
 #define _VOLIMAGE_H
 
-class VolImage {
+namespace MLLJET001 {
+    class VolImage {
     private: // private members
         int width, height; // width and height of image stack
         std::vector<unsigned char **> slices; // data for each slice, in order
@@ -26,6 +27,7 @@ class VolImage {
         // number of bytes uses to store image data bytes
         //and pointers (ignore vector<> container, dims etc)
         int volImageSize(); // define in .cpp
-};
+    };
+}
 
 #endif
