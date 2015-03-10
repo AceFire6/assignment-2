@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
 
     if (argc > 2) {
         for (int i = 2; i < argc; i++) {
-            if (std::string(argv[i]) == "-d") {
+            if ((std::string(argv[i]) == "-d") && !xFlag) {
                 if (argc < 6 || argv[i + 1][0] == '-' || argv[i + 2][0] == '-') {
                     std::cout << "Too few arguments after -d!" << std::endl;
                     return 0;
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
                 i += 4;
             }
 
-            if (std::string(argv[i]) == "-x") {
+            if ((std::string(argv[i]) == "-x") && !dFlag) {
                 if (argc < 5 || argv[i + 1][0] == '-') {
                     std::cout << "Too few arguments after -x!" << std::endl;
                     return 0;
