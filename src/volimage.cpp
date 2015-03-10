@@ -91,13 +91,6 @@ namespace MLLJET001 {
             outFile.write((char *)slice[row], width);
         }
         outFile.close();
-
-//        for (int row = 0; row < height; ++row) {
-//            for (int col = 0; col < width; ++col) {
-//                std::cout << std::to_string(slices[sliceId][row][col]) << " ";
-//            }
-//            std::cout << std::endl;
-//        }
     }
 
 
