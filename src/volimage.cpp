@@ -15,7 +15,12 @@ namespace MLLJET001 {
 
 
     VolImage::~VolImage() {
-
+        for (unsigned char ** slice: slices) {
+            for (int row = 0; row < height; ++row) {
+                delete [] slice[row];
+            }
+            delete [] slice;
+        }
     }
 
     int VolImage::getImageCount() {
