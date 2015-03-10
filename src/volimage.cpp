@@ -88,7 +88,7 @@ namespace MLLJET001 {
 
         outFile.open(rawFilename, std::ios::out | std::ios::binary);
         for (int row = 0; row < height; ++row) {
-            outFile.write((char *)slice[row], width * sizeof(unsigned char));
+            outFile.write((char *)slice[row], width);
         }
         outFile.close();
 
