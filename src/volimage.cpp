@@ -24,7 +24,7 @@ namespace MLLJET001 {
 
 
     bool VolImage::readImages(std::string baseName) {
-        std::string imageFile = "/home/acefire6/ClionProjects/assignment-2/build/mri_raws/" + baseName;
+        std::string imageFile = "mri_raws/" + baseName;
         std::string imageDat = imageFile + ".dat";
 
         std::ifstream inFile(imageDat);
