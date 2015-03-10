@@ -53,6 +53,8 @@ int main(int argc, char *argv[]) {
         std::cout << xFlag << " " << imageI << " " << outputFilename << std::endl;
         if (xFlag) {
             volImage.extract(imageI, outputFilename);
+        } else if (dFlag) {
+            volImage.diffmap(imageI, imageJ, outputFilename);
         }
     }
 
