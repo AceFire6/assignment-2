@@ -80,7 +80,7 @@ namespace MLLJET001 {
     void VolImage::extract(int sliceId, std::string output_prefix) {
         unsigned char ** slice = slices[sliceId];
         std::string datFilename = output_prefix + ".dat";
-        std::string rawFilename = output_prefix + "0.raw";
+        std::string rawFilename = output_prefix + std::to_string(sliceId) + ".raw";
 
         std::ofstream outFile(datFilename, std::ios::out);
         outFile << width << " " << height << " " << 1;
