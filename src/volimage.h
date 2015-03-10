@@ -29,6 +29,8 @@ namespace MLLJET001 {
         int volImageSize(); // define in .cpp
 
         int getImageCount();
+
+        void writeRawFile(std::string baseName, int sliceIndex, unsigned char **slice);
     };
 }
 

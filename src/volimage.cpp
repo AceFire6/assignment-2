@@ -79,18 +79,7 @@ namespace MLLJET001 {
 
     void VolImage::extract(int sliceId, std::string output_prefix) {
         unsigned char ** slice = slices[sliceId];
-        std::string datFilename = output_prefix + ".dat";
-        std::string rawFilename = output_prefix + std::to_string(sliceId) + ".raw";
-
-        std::ofstream outFile(datFilename, std::ios::out);
-        outFile << width << " " << height << " " << 1;
-        outFile.close();
-
-        outFile.open(rawFilename, std::ios::out | std::ios::binary);
-        for (int row = 0; row < height; ++row) {
-            outFile.write((char *)slice[row], width);
-        }
-        outFile.close();
+        writeRawFile(output_prefix, sliceId, slice);
     }
 
 
@@ -105,5 +94,21 @@ namespace MLLJET001 {
         }
 
         return size;
+    }
+
+
+    void VolImage::writeRawFile(std::string baseName, int sliceIndex, unsigned char **slice) {
+        std::string datFilename = baseName + ".dat";
+        std::string rawFilename = baseName + std::to_string(sliceIndex) + ".raw";
+
+        std::ofstream outFile(datFilename, std::ios::out);
+        outFile << width << " " << height << " " << 1;
+        outFile.close();
+
+        outFile.open(rawFilename, std::ios::out | std::ios::binary);
+        for (int row = 0; row < height; ++row) {
+            outFile.write((char *)slice[row], width);
+        }
+        outFile.close();
     }
 }
