@@ -73,7 +73,16 @@ namespace MLLJET001 {
 
 
     void VolImage::diffmap(int sliceI, int sliceJ, std::string output_prefix) {
+        unsigned char ** diffSlice = new unsigned char * [height];
+        for (int row = 0; row < height; ++row) {
+            unsigned char * diffRow = new unsigned char [width];
+            for (int col = 0; col < width; ++col) {
+                diffRow[col] = (unsigned char)(abs(slices[sliceI][row][col] - slices[sliceJ][row][col])/2);
+            }
+            diffSlice[row] = diffRow;
+        }
 
+        writeRawFile(output_prefix, 0, diffSlice);
     }
 
 
