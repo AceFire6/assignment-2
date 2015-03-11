@@ -99,13 +99,11 @@ namespace MLLJET001 {
 
     int VolImage::volImageSize() {
         int size = 0;
+        int pointerSize = sizeof(unsigned char *);
 
-        for (unsigned char ** slice: slices)  {
-            for (int row = 0; row < height; ++row) {
-                size += sizeof(slice[row]);
-                size += sizeof(&slice[row]);
-            }
-        }
+        size = height * width;
+        size += (height * pointerSize) + pointerSize;
+        size *= numImages;
 
         return size;
     }
