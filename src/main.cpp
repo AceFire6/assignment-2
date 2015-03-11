@@ -22,7 +22,10 @@ int main(int argc, char *argv[]) {
     std::string outputFilename;
 
     std::cout << "Number of images: " << volImage.getImageCount() << std::endl;
-    std::cout << "Number of bytes required: " << volImage.volImageSize() << std::endl;
+    std::cout << "Number of bytes required for a single image: " <<
+                (volImage.volImageSize() / volImage.getImageCount()) << std::endl;
+    std::cout << "Number of bytes required for all " << volImage.getImageCount()
+              << " images: " << volImage.volImageSize() << std::endl;
 
     if (argc > 2) {
         for (int i = 2; i < argc; i++) {
