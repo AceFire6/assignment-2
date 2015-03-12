@@ -130,4 +130,12 @@ namespace MLLJET001 {
         }
         outFile.close();
     }
+
+    void VolImage::rowExtract(int rowId, std::string output_prefix) {
+        unsigned char ** rowSlice = new unsigned char * [numImages];
+        for (int imageIndex = 0; imageIndex < numImages; ++imageIndex) {
+            rowSlice[imageIndex] = slices[imageIndex][rowId];
+        }
+        writeRawFile(output_prefix, rowId, rowSlice, width, numImages);
+    }
 }
