@@ -18,7 +18,7 @@ CSC3022H - Assignment 2: Binary File Reading & Vector Manipulation
 
 Run `make run ARGS="<args>"` to run the program.
 
-`<args>` = <basename> [-x sliceId outputName] [-d sliceI sliceJ outputName] [-g rowIndex]
+`<args>` = <basename> [-x sliceId outputName] [-d sliceI sliceJ outputName] [-g rowIndex outputName]
 
 * `<basename>` is compulsory and you can use it to set the folder the files are in. Eg. `mri_raws/MRI`.
 
@@ -35,6 +35,7 @@ Run `make run ARGS="<args>"` to run the program.
 * For `[-g rowIndex]`
     * `-g` creates a cross-section of the image in a certain row. It extracts a specified row of bytes from every image.
     * `rowIndex` specifies which row to take from each image.
+    * `outputName` is the basename of the output raw and `.dat` file.
 
 Run `make clean` to delete all artifacts of `make` and `make run`.
 
