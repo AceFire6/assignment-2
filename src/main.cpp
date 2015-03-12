@@ -64,8 +64,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
         }
-        std::cout << dFlag << " " << imageI << " " << imageJ << " " << outputFilename << std::endl;
-        std::cout << xFlag << " " << imageI << " " << outputFilename << std::endl;
+
         if (xFlag) {
             volImage.extract(imageI, outputFilename);
         } else if (dFlag) {
