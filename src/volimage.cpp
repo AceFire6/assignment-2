@@ -47,8 +47,6 @@ namespace MLLJET001 {
             std::cout << "File not found!" << std::endl;
             return false;
         }
-        std::cout << "Width: " << width << " Height: " << height << " Num Images: " << numImages << std::endl;
-
 
         slices.resize((unsigned int)numImages);
         std::string fileName;
