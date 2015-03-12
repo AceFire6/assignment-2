@@ -102,7 +102,7 @@ namespace MLLJET001 {
         int pointerSize = sizeof(unsigned char *);
 
         size = height * width;
-        size += (height * pointerSize) + pointerSize;
+        size += height * pointerSize;
         size *= numImages;
 
         return size;
