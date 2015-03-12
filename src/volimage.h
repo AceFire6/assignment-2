@@ -30,7 +30,7 @@ namespace MLLJET001 {
 
         int getImageCount();
 
-        void writeRawFile(std::string baseName, int sliceIndex, unsigned char **slice);
+        void writeRawFile(std::string baseName, int sliceIndex, unsigned char **slice, int width=0, int height=0);
     };
 }
 

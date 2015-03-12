@@ -107,9 +107,18 @@ namespace MLLJET001 {
     }
 
 
-    void VolImage::writeRawFile(std::string baseName, int sliceIndex, unsigned char **slice) {
+    void VolImage::writeRawFile(std::string baseName, int sliceIndex,
+            unsigned char **slice, int width/*=0*/, int height/*=0*/) {
         std::string datFilename = baseName + ".dat";
         std::string rawFilename = baseName + std::to_string(sliceIndex) + ".raw";
+
+        if (width == 0) {
+            width = this->width;
+        }
+
+        if (height == 0) {
+            height = this->height;
+        }
 
         std::ofstream outFile(datFilename, std::ios::out);
         outFile << width << " " << height << " " << 1;
