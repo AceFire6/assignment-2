@@ -39,6 +39,7 @@ Run `make run ARGS="<args>"` to run the program.
 
 Run `make clean` to delete all artifacts of `make` and `make run`.
 
+Run `make run-tests` to generate an example of a run for each run option.
 
 ### File Definitions
 
