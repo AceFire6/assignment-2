@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
 
     bool dFlag = false;
     bool xFlag = false;
+    bool gFlag = false;
 
     int imageI = 0;
     int imageJ = 0;
@@ -51,6 +52,17 @@ int main(int argc, char *argv[]) {
                 outputFilename = std::string(argv[i + 2]);
                 break;
             }
+
+            if (std::string(argv[i]) == "-g") {
+                if (argc < 5 || argv[i + 1][0] == '-') {
+                    std::cout << "Too few arguments after -g!" << std::endl;
+                    return 0;
+                }
+                gFlag = true;
+                imageI = atoi(argv[i + 1]);
+                outputFilename = std::string(argv[i + 2]);
+                break;
+            }
         }
         std::cout << dFlag << " " << imageI << " " << imageJ << " " << outputFilename << std::endl;
         std::cout << xFlag << " " << imageI << " " << outputFilename << std::endl;
@@ -58,6 +70,8 @@ int main(int argc, char *argv[]) {
             volImage.extract(imageI, outputFilename);
         } else if (dFlag) {
             volImage.diffmap(imageI, imageJ, outputFilename);
+        } else if (gFlag) {
+            volImage.rowExtract(imageI, outputFilename);
         }
     }
 
