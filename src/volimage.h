@@ -30,8 +30,13 @@ namespace MLLJET001 {
 
         int getImageCount();
 
+        // Writes out bytes stored in 2D unsigned char array to a raw file.
+        // Generates: <baseName>.dat and <baseName><sliceIndex>.raw
+        // width and height are optional parameters that are only used for the '-g' flag output.
         void writeRawFile(std::string baseName, int sliceIndex, unsigned char **slice, int width=0, int height=0);
 
+        // Extracts the same row from every image file and writes the result out with the
+        // given output_prefix
         void rowExtract(int rowId, std::string output_prefix);
     };
 }

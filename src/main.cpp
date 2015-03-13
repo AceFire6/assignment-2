@@ -28,8 +28,8 @@ int main(int argc, char *argv[]) {
     std::cout << "Number of bytes required for all " << volImage.getImageCount()
               << " images: " << volImage.volImageSize() << std::endl;
 
-    if (argc > 2) {
-        for (int i = 2; i < argc; i++) {
+    if (argc > 2) { // Only check that there are flags if there are enough arguments to warrant it
+        for (int i = 2; i < argc; i++) { // Loops through all the arguments, skipping the first two
             if ((std::string(argv[i]) == "-d")) {
                 if (argc < 6 || argv[i + 1][0] == '-' || argv[i + 2][0] == '-') {
                     std::cout << "Too few arguments after -d!" << std::endl;
